@@ -3,10 +3,8 @@ package com.zakrzewski.givemetask.services;
 import com.zakrzewski.givemetask.entities.UserModel;
 import com.zakrzewski.givemetask.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @Service

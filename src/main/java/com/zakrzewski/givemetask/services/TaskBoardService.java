@@ -20,4 +20,9 @@ public class TaskBoardService {
     public List<TaskBoardModel> getAllTaskBoards(){
         return taskBoardRepository.findAll();
     }
+
+    public TaskBoardModel saveNewBoard(TaskBoardModel boardModel){
+        return taskBoardRepository.save(boardModel);
+    }
+
 }
