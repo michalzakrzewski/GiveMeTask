@@ -1,6 +1,7 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user_model")
@@ -16,16 +17,18 @@ public class UserModel {
 
     private Long workTime;
 
-    private String taskDescription;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_assign_id")
+    private List<TaskModel> task;
 
     public UserModel() {
     }
 
-    public UserModel(String firstName, String lastName, Long workTime, String taskDescription) {
+    public UserModel(String firstName, String lastName, Long workTime, List<TaskModel> task) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.workTime = workTime;
-        this.taskDescription = taskDescription;
+        this.task = task;
     }
 
     public Long getId() {
@@ -60,12 +63,12 @@ public class UserModel {
         this.workTime = workTime;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public List<TaskModel>  getTask() {
+        return task;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setTask(List<TaskModel>  task) {
+        this.task = task;
     }
 
     @Override
@@ -75,7 +78,7 @@ public class UserModel {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", workTime=" + workTime +
-                ", taskDescription='" + taskDescription + '\'' +
+                ", task=" + task +
                 '}';
     }
 }
