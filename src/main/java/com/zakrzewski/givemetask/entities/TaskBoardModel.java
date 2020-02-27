@@ -14,7 +14,7 @@ public class TaskBoardModel {
     @Column(name = "board_name")
     private String boardName;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "task_assign_id")
     private List<TaskModel> taskList;
 

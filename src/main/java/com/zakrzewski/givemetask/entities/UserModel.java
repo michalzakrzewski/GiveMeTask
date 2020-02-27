@@ -15,7 +15,6 @@ public class UserModel {
 
     private String lastName;
 
-    private Long workTime;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_assign_id")
@@ -24,10 +23,9 @@ public class UserModel {
     public UserModel() {
     }
 
-    public UserModel(String firstName, String lastName, Long workTime, List<TaskModel> task) {
+    public UserModel(String firstName, String lastName, List<TaskModel> task) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.workTime = workTime;
         this.task = task;
     }
 
@@ -55,14 +53,6 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public Long getWorkTime() {
-        return workTime;
-    }
-
-    public void setWorkTime(Long workTime) {
-        this.workTime = workTime;
-    }
-
     public List<TaskModel>  getTask() {
         return task;
     }
@@ -77,7 +67,6 @@ public class UserModel {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", workTime=" + workTime +
                 ", task=" + task +
                 '}';
     }

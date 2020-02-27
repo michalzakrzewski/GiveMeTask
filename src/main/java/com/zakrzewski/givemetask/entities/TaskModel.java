@@ -13,12 +13,22 @@ public class TaskModel {
     @Column(name = "description")
     private String description;
 
-    public TaskModel(String description) {
-        this.description = description;
-    }
+    @Column(name = "work_time")
+    private Long workTimeTask;
 
     public TaskModel() {
     }
+
+    public TaskModel(String description){
+        this.description = description;
+        this.workTimeTask = 0L;
+    }
+
+    public TaskModel(String description, Long workTimeTask) {
+        this.description = description;
+        this.workTimeTask = workTimeTask;
+    }
+
 
     public Long getId() {
         return id;
@@ -36,11 +46,20 @@ public class TaskModel {
         this.description = description;
     }
 
+    public Long getWorkTimeTask() {
+        return workTimeTask;
+    }
+
+    public void setWorkTimeTask(Long workTimeTask) {
+        this.workTimeTask = workTimeTask;
+    }
+
     @Override
     public String toString() {
         return "TaskModel{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
+                ", workTimeTask=" + workTimeTask +
                 '}';
     }
 }

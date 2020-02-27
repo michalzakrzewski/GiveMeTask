@@ -2,14 +2,13 @@ package com.zakrzewski.givemetask.controllers;
 
 import com.zakrzewski.givemetask.entities.TaskBoardModel;
 import com.zakrzewski.givemetask.services.TaskBoardService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +22,7 @@ public class TaskBoardController {
         this.taskBoardService = taskBoardService;
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<TaskBoardModel> getAllTaskBoards(){
         return taskBoardService.getAllTaskBoards();
     }
@@ -32,5 +31,18 @@ public class TaskBoardController {
     public ResponseEntity<String> saveNewBoard(@RequestBody TaskBoardModel boardModel){
         taskBoardService.saveNewBoard(boardModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Board '%s' created", boardModel.getBoardName()));
+    }
+
+    @RequestMapping(value = "/edit-board/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<String> editTaskBoard(@PathVariable(value = "id") Long id, @Valid @RequestBody TaskBoardModel taskBoardModel) throws NotFoundException {
+        taskBoardService.editTaskBoard(id, taskBoardModel);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Board '%s' updated", taskBoardModel.getBoardName()));
+    }
+
+
+    @RequestMapping(value = "/delete-board/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> deleteTaskBoard(@PathVariable(value = "id") Long id, TaskBoardModel taskBoardModel){
+        taskBoardService.deleteTaskBoard(id, taskBoardModel);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Task Board '%s' deleted", taskBoardModel.getBoardName()));
     }
 }
