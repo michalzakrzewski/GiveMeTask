@@ -1,34 +1,32 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "user_model")
+@Table(name = "users")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
-    private Long workTime;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_assign_id")
-    private List<TaskModel> task;
+    @OneToMany()
+    @JoinColumn(name = "user_tasks_id")
+    private Set<TaskModel> tasksModelSet;
 
     public UserModel() {
     }
 
-    public UserModel(String firstName, String lastName, Long workTime, List<TaskModel> task) {
+    public UserModel(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.workTime = workTime;
-        this.task = task;
     }
 
     public Long getId() {
@@ -55,30 +53,11 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public Long getWorkTime() {
-        return workTime;
+    public Set<TaskModel> getTasksModelSet() {
+        return tasksModelSet;
     }
 
-    public void setWorkTime(Long workTime) {
-        this.workTime = workTime;
-    }
-
-    public List<TaskModel>  getTask() {
-        return task;
-    }
-
-    public void setTask(List<TaskModel>  task) {
-        this.task = task;
-    }
-
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", workTime=" + workTime +
-                ", task=" + task +
-                '}';
+    public void setTasksModelSet(Set<TaskModel> tasksModelSet) {
+        this.tasksModelSet = tasksModelSet;
     }
 }

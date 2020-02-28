@@ -3,7 +3,7 @@ package com.zakrzewski.givemetask.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class TaskModel {
 
     @Id
@@ -13,11 +13,16 @@ public class TaskModel {
     @Column(name = "description")
     private String description;
 
-    public TaskModel(String description) {
-        this.description = description;
-    }
+    @Column(name = "work_time")
+    private Long workTimeTask;
+
 
     public TaskModel() {
+    }
+
+    public TaskModel(String description, Long workTimeTask) {
+        this.description = description;
+        this.workTimeTask = workTimeTask;
     }
 
     public Long getId() {
@@ -36,11 +41,11 @@ public class TaskModel {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "TaskModel{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
+    public Long getWorkTimeTask() {
+        return workTimeTask;
+    }
+
+    public void setWorkTimeTask(Long workTimeTask) {
+        this.workTimeTask = workTimeTask;
     }
 }

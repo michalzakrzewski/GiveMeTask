@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -21,14 +20,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UserModel>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    @PostMapping(value = "/add-user")
+    @RequestMapping(value = "/add-user", method = RequestMethod.POST)
     public ResponseEntity<String> addUser(@RequestBody UserModel userModel){
         userService.saveUser(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("User '%s' created", userModel.getFirstName()));
     }
+
 }
