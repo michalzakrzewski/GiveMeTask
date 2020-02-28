@@ -23,7 +23,7 @@ public class TaskController {
         return taskService.getAllTask();
     }
 
-    @RequestMapping(value = "/add-task", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-task", method = {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<String> addNewTask(@RequestBody TaskModel taskModel){
         taskService.addNewTask(taskModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Task '%s' created", taskModel.getDescription()));

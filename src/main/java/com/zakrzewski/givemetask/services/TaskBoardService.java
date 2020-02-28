@@ -29,7 +29,7 @@ public class TaskBoardService {
     public TaskBoardModel editTaskBoard(Long id, TaskBoardModel taskBoardModel) throws NotFoundException {
         TaskBoardModel taskBoard = taskBoardRepository.findById(id).orElseThrow(() -> new NotFoundException("Board id: " + taskBoardModel.getId() + " not found"));
         taskBoard.setBoardName(taskBoardModel.getBoardName());
-        taskBoard.setTaskList(taskBoardModel.getTaskList());
+        taskBoard.setTasksModelSet(taskBoardModel.getTasksModelSet());
         return taskBoardRepository.save(taskBoard);
     }
 
