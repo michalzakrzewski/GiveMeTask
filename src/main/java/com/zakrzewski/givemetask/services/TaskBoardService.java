@@ -1,21 +1,26 @@
 package com.zakrzewski.givemetask.services;
 
 import com.zakrzewski.givemetask.entities.TaskBoardModel;
+import com.zakrzewski.givemetask.entities.TaskModel;
 import com.zakrzewski.givemetask.repositories.TaskBoardRepository;
+import com.zakrzewski.givemetask.repositories.TaskRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TaskBoardService {
 
     private final TaskBoardRepository taskBoardRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public TaskBoardService(TaskBoardRepository taskBoardRepository) {
+    public TaskBoardService(TaskBoardRepository taskBoardRepository, TaskRepository taskRepository) {
         this.taskBoardRepository = taskBoardRepository;
+        this.taskRepository = taskRepository;
     }
 
     public List<TaskBoardModel> getAllTaskBoards(){
@@ -33,8 +38,14 @@ public class TaskBoardService {
         return taskBoardRepository.save(taskBoard);
     }
 
-    public void deleteTaskBoard(Long id, TaskBoardModel taskBoardModel){
-        taskBoardRepository.deleteById(id);
+    public TaskBoardModel addTaskToBoard(Long idBoard, Long idTask) {
+        Set<TaskModel> taskModelList = taskRepository.findListById(idTask);
+        TaskBoardModel boardModel = taskBoardRepository.findById(idBoard).orElse(null);
+        boardModel.setTasksModelSet(taskModelList);
+        return taskBoardRepository.save(boardModel);
     }
 
+    public void deleteTaskBoard(Long id){
+        taskBoardRepository.deleteById(id);
+    }
 }
