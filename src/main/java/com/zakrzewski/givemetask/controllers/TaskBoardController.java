@@ -1,6 +1,7 @@
 package com.zakrzewski.givemetask.controllers;
 
 import com.zakrzewski.givemetask.entities.TaskBoardModel;
+import com.zakrzewski.givemetask.entities.TaskModel;
 import com.zakrzewski.givemetask.services.TaskBoardService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,14 @@ public class TaskBoardController {
 
 
     @RequestMapping(value = "/delete-board/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteTaskBoard(@PathVariable(value = "id") Long id, TaskBoardModel taskBoardModel){
-        taskBoardService.deleteTaskBoard(id, taskBoardModel);
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Task Board '%s' deleted", taskBoardModel.getBoardName()));
+    public ResponseEntity<String> deleteTaskBoard(@PathVariable(value = "id") Long id){
+        taskBoardService.deleteTaskBoard(id);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Task Board '%s' deleted", id));
+    }
+
+    @RequestMapping(value = "/{idBoard}/task/{idTask}", method = RequestMethod.PUT)
+    public ResponseEntity<String> addTasksToBoard(@PathVariable(value = "idBoard") Long idBoard, @PathVariable(value = "idTask") Long idTask){
+        taskBoardService.addTaskToBoard(idTask, idBoard);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("Board update by: idTask '%s' and idBoard '%s'", idTask, idBoard));
     }
 }

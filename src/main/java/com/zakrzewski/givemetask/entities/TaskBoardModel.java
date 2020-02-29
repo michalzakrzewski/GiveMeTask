@@ -25,6 +25,11 @@ public class TaskBoardModel {
         this.boardName = boardName;
     }
 
+    public TaskBoardModel(String boardName, Set<TaskModel> tasksModelSet) {
+        this.boardName = boardName;
+        this.tasksModelSet = tasksModelSet;
+    }
+
     public Long getId() {
         return id;
     }
