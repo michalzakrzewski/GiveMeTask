@@ -1,6 +1,7 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class TaskBoardModel {
 
     @OneToMany
     @JoinColumn(name = "board_tasks_id")
-    private Set<TaskModel> tasksModelSet;
+    private List<TaskModel> tasksModelList;
 
     public TaskBoardModel() {
     }
@@ -25,9 +26,9 @@ public class TaskBoardModel {
         this.boardName = boardName;
     }
 
-    public TaskBoardModel(String boardName, Set<TaskModel> tasksModelSet) {
+    public TaskBoardModel(String boardName, List<TaskModel> tasksModelList) {
         this.boardName = boardName;
-        this.tasksModelSet = tasksModelSet;
+        this.tasksModelList = tasksModelList;
     }
 
     public Long getId() {
@@ -46,11 +47,11 @@ public class TaskBoardModel {
         this.boardName = boardName;
     }
 
-    public Set<TaskModel> getTasksModelSet() {
-        return tasksModelSet;
+    public List<TaskModel> getTasksModelList() {
+        return tasksModelList;
     }
 
-    public void setTasksModelSet(Set<TaskModel> tasksModelSet) {
-        this.tasksModelSet = tasksModelSet;
+    public void setTasksModelList(List<TaskModel> tasksModelList) {
+        this.tasksModelList = tasksModelList;
     }
 }

@@ -49,7 +49,7 @@ public class TaskBoardController {
 
     @RequestMapping(value = "/{idBoard}/task/{idTask}", method = RequestMethod.PUT)
     public ResponseEntity<String> addTasksToBoard(@PathVariable(value = "idBoard") Long idBoard, @PathVariable(value = "idTask") Long idTask){
-        taskBoardService.addTaskToBoard(idTask, idBoard);
-        return ResponseEntity.status(HttpStatus.OK).body(String.format("Board update by: idTask '%s' and idBoard '%s'", idTask, idBoard));
+        taskBoardService.addTaskToBoard(idBoard, idTask);
+        return ResponseEntity.status(HttpStatus.OK).body(String.format("To board '%s', add task '%s'", idBoard, idTask));
     }
 }
