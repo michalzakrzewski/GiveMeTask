@@ -41,10 +41,10 @@ public class TaskBoardService {
         return taskBoardRepository.save(taskBoard);
     }
 
-    public TaskBoardModel addTaskToBoard(Long idBoard, Long idTask) {
-        TaskModel task = taskRepository.findById(idTask).orElse(null);
-        TaskBoardModel board = taskBoardRepository.findById(idBoard).orElse(null);
-        List<TaskModel> tasksModelList = board.getTasksModelList();
+    public TaskBoardModel addTaskToBoard(Long idBoard, Long idTask) throws NotFoundException {
+        TaskModel task = taskRepository.findById(idTask).orElseThrow(() -> new NotFoundException("Task not found, id: " + idTask));
+        TaskBoardModel board = taskBoardRepository.findById(idBoard).orElseThrow(() -> new NotFoundException("Board not found, id: " + idTask));
+        Set<TaskModel> tasksModelList = board.getTasksModelList();
         tasksModelList.add(task);
         board.setTasksModelList(tasksModelList);
         return taskBoardRepository.save(board);

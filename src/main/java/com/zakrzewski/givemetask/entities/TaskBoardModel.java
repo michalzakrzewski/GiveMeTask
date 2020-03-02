@@ -17,7 +17,7 @@ public class TaskBoardModel {
 
     @OneToMany
     @JoinColumn(name = "board_tasks_id")
-    private List<TaskModel> tasksModelList;
+    private Set<TaskModel> tasksModelList;
 
     public TaskBoardModel() {
     }
@@ -26,7 +26,7 @@ public class TaskBoardModel {
         this.boardName = boardName;
     }
 
-    public TaskBoardModel(String boardName, List<TaskModel> tasksModelList) {
+    public TaskBoardModel(String boardName, Set<TaskModel> tasksModelList) {
         this.boardName = boardName;
         this.tasksModelList = tasksModelList;
     }
@@ -47,11 +47,11 @@ public class TaskBoardModel {
         this.boardName = boardName;
     }
 
-    public List<TaskModel> getTasksModelList() {
+    public Set<TaskModel> getTasksModelList() {
         return tasksModelList;
     }
 
-    public void setTasksModelList(List<TaskModel> tasksModelList) {
+    public void setTasksModelList(Set<TaskModel> tasksModelList) {
         this.tasksModelList = tasksModelList;
     }
 }
