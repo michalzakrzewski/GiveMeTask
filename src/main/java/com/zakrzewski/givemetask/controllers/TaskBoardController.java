@@ -1,7 +1,6 @@
 package com.zakrzewski.givemetask.controllers;
 
 import com.zakrzewski.givemetask.entities.TaskBoardModel;
-import com.zakrzewski.givemetask.entities.TaskModel;
 import com.zakrzewski.givemetask.services.TaskBoardService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class TaskBoardController {
     }
 
     @RequestMapping(value = "/{idBoard}/task/{idTask}", method = RequestMethod.PUT)
-    public ResponseEntity<String> addTasksToBoard(@PathVariable(value = "idBoard") Long idBoard, @PathVariable(value = "idTask") Long idTask){
+    public ResponseEntity<String> addTasksToBoard(@PathVariable(value = "idBoard") Long idBoard, @PathVariable(value = "idTask") Long idTask) throws NotFoundException {
         taskBoardService.addTaskToBoard(idBoard, idTask);
         return ResponseEntity.status(HttpStatus.OK).body(String.format("To board '%s', add task '%s'", idBoard, idTask));
     }
