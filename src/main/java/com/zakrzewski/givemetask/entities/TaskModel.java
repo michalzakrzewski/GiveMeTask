@@ -16,13 +16,17 @@ public class TaskModel {
     @Column(name = "work_time")
     private Long workTimeTask;
 
+    @OneToOne()
+    private UserModel user;
+
 
     public TaskModel() {
     }
 
-    public TaskModel(String description, Long workTimeTask) {
+    public TaskModel(String description, Long workTimeTask, UserModel user) {
         this.description = description;
         this.workTimeTask = workTimeTask;
+        this.user = user;
     }
 
     public Long getId() {
@@ -47,5 +51,13 @@ public class TaskModel {
 
     public void setWorkTimeTask(Long workTimeTask) {
         this.workTimeTask = workTimeTask;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }
