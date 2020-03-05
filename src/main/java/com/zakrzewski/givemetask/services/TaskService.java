@@ -2,9 +2,10 @@ package com.zakrzewski.givemetask.services;
 
 import com.zakrzewski.givemetask.entities.TaskModel;
 import com.zakrzewski.givemetask.entities.UserModel;
+import com.zakrzewski.givemetask.exceptions.TaskNotFoundException;
+import com.zakrzewski.givemetask.exceptions.UserNotFoundException;
 import com.zakrzewski.givemetask.repositories.TaskRepository;
 import com.zakrzewski.givemetask.repositories.UserRepository;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,9 @@ public class TaskService {
         return taskRepository.save(taskModel);
     }
 
-    public TaskModel addUserToTask(Long idTask, Long idUser) throws NotFoundException {
-        TaskModel task = taskRepository.findById(idTask).orElseThrow(() -> new NotFoundException("Task id not found"));
-        UserModel user = userRepository.findById(idUser).orElseThrow(() -> new NotFoundException("User not found"));
+    public TaskModel addUserToTask(Long idTask, Long idUser) {
+        TaskModel task = taskRepository.findById(idTask).orElseThrow(() -> new TaskNotFoundException(idTask));
+        UserModel user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundException(idUser));
         task.setUser(user);
         return taskRepository.save(task);
 

@@ -33,8 +33,13 @@ public class TaskBoardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Board '%s' created", boardModel.getBoardName()));
     }
 
+    @RequestMapping(value = "/get-one/{boardId}", method = RequestMethod.GET)
+    public TaskBoardModel getOneById(@PathVariable("boardId") Long boardId){
+        return taskBoardService.getOneTaskBoard(boardId);
+    }
+
     @RequestMapping(value = "/edit-board/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> editTaskBoard(@PathVariable(value = "id") Long id, @Valid @RequestBody TaskBoardModel taskBoardModel) throws NotFoundException {
+    public ResponseEntity<String> editTaskBoard(@PathVariable(value = "id") Long id, @Valid @RequestBody TaskBoardModel taskBoardModel) {
         taskBoardService.editTaskBoard(id, taskBoardModel);
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Board '%s' updated", taskBoardModel.getBoardName()));
     }
