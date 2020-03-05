@@ -39,7 +39,7 @@ public class TaskBoardController {
     }
 
     @RequestMapping(value = "/edit-board/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<String> editTaskBoard(@PathVariable(value = "id") Long id, @Valid @RequestBody TaskBoardModel taskBoardModel) throws NotFoundException {
+    public ResponseEntity<String> editTaskBoard(@PathVariable(value = "id") Long id, @Valid @RequestBody TaskBoardModel taskBoardModel) {
         taskBoardService.editTaskBoard(id, taskBoardModel);
         return ResponseEntity.status(HttpStatus.OK).body(String.format("Board '%s' updated", taskBoardModel.getBoardName()));
     }

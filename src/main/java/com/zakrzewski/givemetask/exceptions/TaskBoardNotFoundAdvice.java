@@ -1,4 +1,4 @@
-package com.zakrzewski.givemetask.Exceptions;
+package com.zakrzewski.givemetask.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
