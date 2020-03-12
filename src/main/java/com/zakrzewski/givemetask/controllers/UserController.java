@@ -5,12 +5,10 @@ import com.zakrzewski.givemetask.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -33,5 +31,10 @@ public class UserController {
     public ResponseEntity<String> addNewUser(@RequestBody @Valid UserModel userModel){
         userService.addNewUser(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Add new user: '%s'", userModel.getNickName()));
+    }
+
+    @RequestMapping(value = "/{nickName}")
+    public UserModel getUserByNickName(@Valid @PathVariable("nickName") String nickName){
+        return userService.getUserByNickName(nickName);
     }
 }
