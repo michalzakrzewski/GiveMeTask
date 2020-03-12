@@ -24,4 +24,8 @@ public class UserService {
     public UserModel addNewUser(UserModel userModel){
         return userRepository.save(userModel);
     }
+
+    public UserModel getUserByNickName(String nickName){
+        return userRepository.findByNickName(nickName);
+    }
 }
