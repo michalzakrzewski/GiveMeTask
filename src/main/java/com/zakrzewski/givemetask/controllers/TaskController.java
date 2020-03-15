@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,7 @@ public class TaskController {
 
     @RequestMapping(value = "/add-task", method = {RequestMethod.POST, RequestMethod.GET})
     public ResponseEntity<String> addNewTask(@RequestBody TaskModel taskModel){
+        taskModel.setCreateTaskDateTime(LocalDateTime.now());
         taskService.addNewTask(taskModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Task '%s' created", taskModel.getDescription()));
     }

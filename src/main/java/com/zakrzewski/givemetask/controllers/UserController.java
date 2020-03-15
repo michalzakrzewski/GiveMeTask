@@ -29,6 +29,7 @@ public class UserController {
 
     @RequestMapping(value = "/add-new-user", method = RequestMethod.POST)
     public ResponseEntity<String> addNewUser(@RequestBody @Valid UserModel userModel){
+
         userService.addNewUser(userModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(String.format("Add new user: '%s'", userModel.getNickName()));
     }

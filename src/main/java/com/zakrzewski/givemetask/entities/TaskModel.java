@@ -1,6 +1,8 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -15,6 +17,15 @@ public class TaskModel {
 
     @Column(name = "work_time")
     private Long workTimeTask;
+
+    @Column(name = "create_task_date_time")
+    private LocalDateTime createTaskDateTime;
+
+    @Column(name = "start_task_date_time")
+    private LocalDateTime startTaskDateTime;
+
+    @Column(name = "end_task_date_time")
+    private LocalDateTime endTaskDateTime;
 
     @OneToOne()
     private UserModel user;
@@ -51,6 +62,30 @@ public class TaskModel {
 
     public void setWorkTimeTask(Long workTimeTask) {
         this.workTimeTask = workTimeTask;
+    }
+
+    public LocalDateTime getCreateTaskDateTime() {
+        return createTaskDateTime;
+    }
+
+    public void setCreateTaskDateTime(LocalDateTime createTaskDateTime) {
+        this.createTaskDateTime = createTaskDateTime;
+    }
+
+    public LocalDateTime getStartTaskDateTime() {
+        return startTaskDateTime;
+    }
+
+    public void setStartTaskDateTime(LocalDateTime startTaskDateTime) {
+        this.startTaskDateTime = startTaskDateTime;
+    }
+
+    public LocalDateTime getEndTaskDateTime() {
+        return endTaskDateTime;
+    }
+
+    public void setEndTaskDateTime(LocalDateTime endTaskDateTime) {
+        this.endTaskDateTime = endTaskDateTime;
     }
 
     public UserModel getUser() {
