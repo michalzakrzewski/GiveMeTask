@@ -1,7 +1,6 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,23 +20,19 @@ public class TaskModel {
     @Column(name = "create_task_date_time")
     private LocalDateTime createTaskDateTime;
 
-    @Column(name = "start_task_date_time")
-    private LocalDateTime startTaskDateTime;
-
-    @Column(name = "end_task_date_time")
-    private LocalDateTime endTaskDateTime;
-
     @OneToOne()
-    private UserModel user;
+    private UserModel assignedTo;
+
+
 
 
     public TaskModel() {
     }
 
-    public TaskModel(String description, Long workTimeTask, UserModel user) {
+    public TaskModel(String description, Long workTimeTask, UserModel assignedTo) {
         this.description = description;
         this.workTimeTask = workTimeTask;
-        this.user = user;
+        this.assignedTo = assignedTo;
     }
 
     public Long getId() {
@@ -72,27 +67,12 @@ public class TaskModel {
         this.createTaskDateTime = createTaskDateTime;
     }
 
-    public LocalDateTime getStartTaskDateTime() {
-        return startTaskDateTime;
+
+    public UserModel getAssignedTo() {
+        return assignedTo;
     }
 
-    public void setStartTaskDateTime(LocalDateTime startTaskDateTime) {
-        this.startTaskDateTime = startTaskDateTime;
-    }
-
-    public LocalDateTime getEndTaskDateTime() {
-        return endTaskDateTime;
-    }
-
-    public void setEndTaskDateTime(LocalDateTime endTaskDateTime) {
-        this.endTaskDateTime = endTaskDateTime;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setAssignedTo(UserModel user) {
+        this.assignedTo = user;
     }
 }

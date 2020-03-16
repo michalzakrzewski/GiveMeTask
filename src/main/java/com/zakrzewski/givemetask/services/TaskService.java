@@ -34,7 +34,7 @@ public class TaskService {
     public TaskModel addUserToTask(Long idTask, Long idUser) {
         TaskModel task = taskRepository.findById(idTask).orElseThrow(() -> new TaskNotFoundException(idTask));
         UserModel user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundException(idUser));
-        task.setUser(user);
+        task.setAssignedTo(user);
         return taskRepository.save(task);
 
     }
