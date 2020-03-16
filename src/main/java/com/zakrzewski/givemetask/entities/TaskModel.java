@@ -1,6 +1,7 @@
 package com.zakrzewski.givemetask.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -16,17 +17,22 @@ public class TaskModel {
     @Column(name = "work_time")
     private Long workTimeTask;
 
+    @Column(name = "create_task_date_time")
+    private LocalDateTime createTaskDateTime;
+
     @OneToOne()
-    private UserModel user;
+    private UserModel assignedTo;
+
+
 
 
     public TaskModel() {
     }
 
-    public TaskModel(String description, Long workTimeTask, UserModel user) {
+    public TaskModel(String description, Long workTimeTask, UserModel assignedTo) {
         this.description = description;
         this.workTimeTask = workTimeTask;
-        this.user = user;
+        this.assignedTo = assignedTo;
     }
 
     public Long getId() {
@@ -53,11 +59,20 @@ public class TaskModel {
         this.workTimeTask = workTimeTask;
     }
 
-    public UserModel getUser() {
-        return user;
+    public LocalDateTime getCreateTaskDateTime() {
+        return createTaskDateTime;
     }
 
-    public void setUser(UserModel user) {
-        this.user = user;
+    public void setCreateTaskDateTime(LocalDateTime createTaskDateTime) {
+        this.createTaskDateTime = createTaskDateTime;
+    }
+
+
+    public UserModel getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(UserModel user) {
+        this.assignedTo = user;
     }
 }

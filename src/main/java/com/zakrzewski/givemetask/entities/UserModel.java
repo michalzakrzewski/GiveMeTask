@@ -19,7 +19,7 @@ public class UserModel {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "assignedTo")
     private TaskModel task;
 
     public UserModel() {

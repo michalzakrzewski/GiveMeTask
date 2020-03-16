@@ -9,6 +9,7 @@ import com.zakrzewski.givemetask.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -28,13 +29,14 @@ public class TaskService {
     }
 
     public TaskModel addNewTask(TaskModel taskModel){
+        taskModel.setCreateTaskDateTime(LocalDateTime.now());
         return taskRepository.save(taskModel);
     }
 
     public TaskModel addUserToTask(Long idTask, Long idUser) {
         TaskModel task = taskRepository.findById(idTask).orElseThrow(() -> new TaskNotFoundException(idTask));
         UserModel user = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundException(idUser));
-        task.setUser(user);
+        task.setAssignedTo(user);
         return taskRepository.save(task);
 
     }
